@@ -62,8 +62,8 @@ while($fila4=mysqli_fetch_array($sql4)){
 $i=3;
 while($fila2=mysqli_fetch_array($sql2)){
   $objPHP->setActiveSheetIndex(0)
-  ->setCellValue('F'.$i,$fila2['Pago'])
-  ->setCellValue('G'.$i,$fila2['Fecha']);
+  ->setCellValue('F'.$i,$fila2['Fecha'])
+  ->setCellValue('G'.$i,$fila2['Pago']);
   $i++;}
 mysqli_free_result($sql);
 mysqli_close($conexion);

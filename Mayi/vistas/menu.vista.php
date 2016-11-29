@@ -303,6 +303,12 @@
     $(document).ready(function(){
       $('#modalConta').on('click',function(){
         $('.contacto').addClass('animated rotateInDownRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oAnimationEnd animationend');});});
+    $(document).ready(function(){
+      $('#eliminarModal').on('click',function(){
+        $('.eliminarArticulo').addClass('animated fadeInLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oAnimationEnd animationend');});});
+    $(document).ready(function(){
+      $('#eliminarCliente').on('click',function(){
+        $('.eliminarCliente').addClass('animated flipInY').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oAnimationEnd animationend');});});
     /*TABLA ARTÍCULOS*/
     $('#tablaarti').DataTable({
     "language":{

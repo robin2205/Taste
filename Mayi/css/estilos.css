@@ -58,15 +58,6 @@
 #cuerpomenu{
   font-size: 15px;
   font-family: "Merriweather",Arial,sans-serif,helvetica;
-  /*overflow-x: hidden;
-  background-image: url(../imagenes/fondo.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
   width: 100%;}
 #background2{
   width: 100%;
@@ -244,7 +235,8 @@
   width: 60px;}
 /*ESTILOS PARA EL MODAL DE ARTÍCULOS*/
 .editarArticulos,.editarCategoria,.editarPedidos,.editarCliente,
-.editarVentas,.modificarVenta,.informes,.eliminarVenta,.contacto{
+.editarVentas,.modificarVenta,.informes,.eliminarVenta,.contacto,
+.eliminarArticulo,.eliminarCliente{
   margin-top: 30px;}
 .venderArticulo{
   margin-top: 30px;

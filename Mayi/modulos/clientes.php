@@ -61,6 +61,9 @@
               data-id3="<?=$fila['Deuda'];?>"
               data-id4="<?=$fila['SaldoaFavor'];?>">Modificar</a>
               <a class="btn btn-xs btn-info" href="javascript:VentasCliente(<?=$fila['IdCliente'];?>);">Detalles</a>
+              <a class="btn btn-xs btn-danger" id="eliminarCliente" data-toggle="modal" data-target=".eliminarCliente"
+              data-id="<?=$fila['IdCliente'];?>"
+              data-id2="<?=$fila['NombreCliente'];?>">Eliminar</a>
             </td>
           </tr>
         <?php }}?>
@@ -84,7 +87,7 @@ function VentasCliente(idCliente){
   var id=idCliente;
   if(id!=null){
     window.location="informes/infoventascliente.php?idCliente="+id;}}
-//MODAL EDITAR CATEGORÍA
+//MODAL EDITAR CLIENTE
 $(document).ready(function(e){
   $('.editarCliente').on('show.bs.modal',function(e){
     var idcliente=$(e.relatedTarget).data().id;
@@ -110,8 +113,17 @@ $(document).ready(function(e){
   $('.modificarVenta').on('show.bs.modal',function(e){
     var saldo=$(e.relatedTarget).data().id4;
     $(e.currentTarget).find('#saldo').val(saldo);});});
+//MODAL ELIMINAR CLIENTE
+$(document).ready(function(e){
+  $('.eliminarCliente').on('show.bs.modal',function(e){
+    var idcliente=$(e.relatedTarget).data().id;
+    $(e.currentTarget).find('#idcliente').val(idcliente);});});
+$(document).ready(function(e){
+  $('.eliminarCliente').on('show.bs.modal',function(e){
+    var nombre=$(e.relatedTarget).data().id2;
+    $(e.currentTarget).find('#nombre').val(nombre);});});
 </script>
-<!--MODAL PARA EDITAR LA CATEGORÍA-->
+<!--MODAL PARA EDITAR EL CLIENTE-->
 <div class="modal editarCliente" id="editarCliente" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -213,6 +225,39 @@ $(document).ready(function(e){
           </div><br id="espacio"/>
           <input type="submit" class="btn btn-success" value="Actualizar">
           <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MODAL PARA ELIMINAR EL CLIENTE-->
+<div class="modal eliminarCliente" id="eliminarCliente" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">X</button>
+        <h3 class="modal-title">Eliminar Cliente</h3>
+      </div>
+      <div class="modal-body custom-height-modal">
+        <form name="editarCliente" action="acciones/eliminarCliente.php" method="post">
+          <div class="main row">
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Id Cliente</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-flag" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="idcliente" name="idcliente" readonly>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-8">
+              <label class="hidden-xs control-label">Nombre Cliente</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="nombre" name="nombre" readonly>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-danger" id="btnmodalarti" value="Eliminar">
+          <button type="button" class="btn btn-info" id="btnmodalarti" data-dismiss="modal">Cancelar</button>
         </form>
       </div>
     </div>

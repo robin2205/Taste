@@ -56,6 +56,15 @@ include 'acciones/conexion.php';?>
                     data-id=<?=$fila['IdArticulo'];?>
                     data-id2="<?=$fila['Referencia'];?>"
                     data-id3="<?=$fila['PVP'];?>">Venta</a>
+                    <a class="btn btn-xs btn-danger" id="eliminarModal" data-toggle="modal" data-target=".eliminarArticulo"
+                      data-id="<?=$fila['IdArticulo'];?>"
+                      data-id2="<?=$fila['IdPedido'];?>"
+                      data-id3="<?=$fila['Referencia'];?>"
+                      data-id4="<?=$fila2['Descripcion'];?>"
+                      data-id5="<?=$fila['Costo'];?>"
+                      data-id6="<?=$fila['PrecioRealPesos'];?>"
+                      data-id7="<?=$fila['Utilidad'];?>"
+                      data-id8="<?=$fila['PVP'];?>">Eliminar</a>
                   </td>
                 </tr>
               <?php }}?>
@@ -127,6 +136,39 @@ $(document).ready(function(e){
   $('.venderArticulo').on('show.bs.modal',function(e){
     var pvp=$(e.relatedTarget).data().id3;
     $(e.currentTarget).find('#pvp').val(pvp);});});
+//MODAL ELIMINAR ARTÍCULO
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var idarticulo=$(e.relatedTarget).data().id;
+    $(e.currentTarget).find('#idArticulo').val(idarticulo);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var idpedido=$(e.relatedTarget).data().id2;
+    $(e.currentTarget).find('#idpedido').val(idpedido);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var referencia=$(e.relatedTarget).data().id3;
+    $(e.currentTarget).find('#referencia').val(referencia);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var categoria=$(e.relatedTarget).data().id4;
+    $(e.currentTarget).find('#categoria').val(categoria);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var costo=$(e.relatedTarget).data().id5;
+    $(e.currentTarget).find('#costo').val(costo);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var prp=$(e.relatedTarget).data().id6;
+    $(e.currentTarget).find('#prp').val(prp);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var utilidad=$(e.relatedTarget).data().id7;
+    $(e.currentTarget).find('#utilidad').val(utilidad);});});
+$(document).ready(function(e){
+  $('.eliminarArticulo').on('show.bs.modal',function(e){
+    var pvp=$(e.relatedTarget).data().id8;
+    $(e.currentTarget).find('#pvp').val(pvp);});});
 </script>
 <div class="modal editarArticulos" id="editarArticulos" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog" id="dialog-Articulos">
@@ -149,7 +191,7 @@ $(document).ready(function(e){
               <label class="hidden-xs control-label">Pedido</label>
               <div class="input-group">
     						<span class="input-group-addon" id="addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-    						<input class="form-control" type="text" id="idpedido" name="idpedido" readonly>
+    						<input class="form-control" type="text" id="idpedido" name="idpedido" onkeypress="return validar_numero(event)" required placeholder="Ingrese el Número del Pedido">
     					</div>
             </div>
             <div class="form-group col-xs-12 col-md-4">
@@ -282,6 +324,85 @@ $(document).ready(function(e){
             </div>
           </div><br id="espacio"/>
           <input type="submit" class="btn btn-primary" id="btnmodalarti" value="Vender">
+          <button type="button" class="btn btn-info" id="btnmodalarti" data-dismiss="modal">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal eliminarArticulo" id="eliminarArticulo" role="dialog" tabindex="-1" aria-labelledby="basicModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog" id="dialog-Articulos">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">X</button>
+        <h3 class="modal-title">Eliminar Artículo</h3>
+      </div>
+      <div class="modal-body custom-height-modal">
+        <form class="form-inline" name="editarArticulos" action="acciones/eliminarArticulo.php" method="post" enctype="multipart/form-data">
+          <div class="main row">
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Id Artículo</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-flag" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="idArticulo" name="idArticulo" readonly>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Pedido</label>
+              <div class="input-group">
+    						<span class="input-group-addon" id="addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+    						<input class="form-control" type="text" id="idpedido" name="idpedido" readonly>
+    					</div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Categoría</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-object-ungroup" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="categoria" name="categoria" readonly
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Referencia</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-folder-open" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="referencia" name="referencia" readonly>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Costo</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="costo" name="costo" readonly>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Precio Real</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="prp" name="prp" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">Utilidad</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="utilidad" name="utilidad" readonly>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+              <label class="hidden-xs control-label">PVP</label>
+              <div class="input-group">
+                <span class="input-group-addon" id="addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" id="pvp" name="pvp" readonly>
+              </div>
+            </div>
+          </div><br id="espacio"/>
+          <input type="submit" class="btn btn-danger" id="btnmodalarti" value="Eliminar">
           <button type="button" class="btn btn-info" id="btnmodalarti" data-dismiss="modal">Cancelar</button>
         </form>
       </div>

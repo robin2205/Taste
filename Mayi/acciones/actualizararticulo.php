@@ -2,6 +2,7 @@
 session_start();
 require 'conexion.php';
 $id=$_POST['idArticulo'];
+$pedido=$_POST['idpedido'];
 $referencia=$_POST['referencia'];
 $costo=$_POST['costo'];
 $prp=$_POST['prp'];
@@ -14,7 +15,7 @@ $pvp=number_format($pvp,2,'.','');
 $archivo=$_FILES['foto']['tmp_name'];
 /*VALIDAMOS SI LA FOTO FUE CAMBIADA O NO*/
 if(empty($archivo)){
-  $sql=mysqli_query($conexion,"UPDATE articulos SET Referencia='".$referencia."',Costo=".$costo.",PrecioRealPesos=".$prp.",Utilidad=".$utilidad.",PVP=".$pvp."WHERE IdArticulo=".$id,0);
+  $sql=mysqli_query($conexion,"UPDATE articulos SET IdPedido='".$pedido."',Referencia='".$referencia."',Costo=".$costo.",PrecioRealPesos=".$prp.",Utilidad=".$utilidad.",PVP=".$pvp."WHERE IdArticulo=".$id);
   if($sql<0){?>
     <script>
       alert('La información no fue actualizada Correctamente.')
@@ -36,7 +37,7 @@ else{
   $nombreArchivo=$_FILES['foto']['name'];
   move_uploaded_file($archivo,$ruta."/".$nombreArchivo);
   $ruta=$ruta."/".$nombreArchivo;
-  $sql=mysqli_query($conexion,"UPDATE articulos SET Referencia='".$referencia."',Costo=".$costo.",PrecioRealPesos=".$prp.",Utilidad=".$utilidad.",PVP=".$pvp.",Foto='".$ruta."'WHERE IdArticulo=".$id);
+  $sql=mysqli_query($conexion,"UPDATE articulos SET IdPedido='".$pedido."',Referencia='".$referencia."',Costo=".$costo.",PrecioRealPesos=".$prp.",Utilidad=".$utilidad.",PVP=".$pvp.",Foto='".$ruta."'WHERE IdArticulo=".$id);
   if($sql<0){?>
     <script>
       alert('La información no fue actualizada Correctamente.')
